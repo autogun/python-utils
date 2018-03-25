@@ -7,3 +7,4 @@ Personal python utils to make my daily work easier
 - OpenProxyDetector.py
   - This was built in mind to run on AWS Lambda with an access to DynamoDB & SES servcies for a list of proxy hosts and email service.
     Checks if proxy host is an open proxy both via browser and non-browser user-agent.
+    Sends an email when such host is detected
