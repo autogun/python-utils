@@ -18,9 +18,9 @@ def ruleAction(action, id, ip):
         GroupId=id,
         IpPermissions=[
             {
-                'IpProtocol': '-1',
-                'FromPort': -1,
-                'ToPort': -1,
+                'IpProtocol': 'tcp',
+                'FromPort': 22,
+                'ToPort': 22,
                 'IpRanges': [
                     {
                         'CidrIp': '{}'.format(ip),
