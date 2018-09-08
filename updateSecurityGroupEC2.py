@@ -1,6 +1,5 @@
 import boto3
 import requests
-import sys
 requests.packages.urllib3.disable_warnings()
 
 current_ip = requests.get('https://api.ipify.org', timeout=10, verify=False).text.strip() + '/32'
