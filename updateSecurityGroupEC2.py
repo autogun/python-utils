@@ -52,9 +52,9 @@ for grp_name, value in security_groups.iteritems():
                     break
                 else:
                     if (current_ip != old_ip):
-                        print '[UPDATE] IP {} update in security group {}'.format(current_ip, grp_name)
                         ruleAction('revoke_ingress', security_group.id, old_ip)
                         ruleAction('authorize_ingress', security_group.id, current_ip)
+                        print '[UPDATE] IP {} update in security group {}'.format(current_ip, grp_name)
 
     if new_grp_detected:
         print '[NEW] IP {} added to security group {}'.format(current_ip, grp_name)
