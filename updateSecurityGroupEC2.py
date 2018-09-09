@@ -1,9 +1,7 @@
 import boto3
 import requests
-import sys
-requests.packages.urllib3.disable_warnings()
 
-current_ip = requests.get('http://api.ipify.org', timeout=10, verify=False).text.strip() + '/32'
+current_ip = requests.get('https://api.ipify.org', timeout=10, verify=False).text.strip() + '/32'
 rule_desc = '<Rule-Desc-Here>'
 security_groups = {
     'Group1': ['sg-abc', 'eu-west-1'],
@@ -15,9 +13,9 @@ def ruleAction(action, id, ip):
         GroupId=id,
         IpPermissions=[
             {
-                'IpProtocol': '-1',
-                'FromPort': -1,
-                'ToPort': -1,
+                'IpProtocol': 'tcp',
+                'FromPort': 22,
+                'ToPort': 22,
                 'IpRanges': [
                     {
                         'CidrIp': '{}'.format(ip),
