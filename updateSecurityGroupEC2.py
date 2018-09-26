@@ -11,7 +11,7 @@ security_groups = {
 }
 
 def ruleAction(action, id, ip):
-    response = getattr(security_group, action)(
+    response = getattr(main.security_group, action)(
         GroupId=id,
         IpPermissions=[
             {
@@ -42,7 +42,7 @@ def main():
         grp_region = value[1]
         resource = session.resource('ec2', region_name=grp_region)
         client = session.client('ec2', region_name=grp_region)
-        security_group = resource.SecurityGroup(grp_id)
+        main.security_group = resource.SecurityGroup(grp_id)
         describe_sec_group = client.describe_security_groups(GroupIds=[grp_id])
         new_grp_detected = True
         for ip_ranges in describe_sec_group['SecurityGroups'][0]['IpPermissions']:
@@ -61,12 +61,12 @@ def main():
                         else:
                             if (current_ip != old_ip):
                                 print '[UPDATE] IP {} updated in "{}"'.format(current_ip, grp_name)
-                                ruleAction('revoke_ingress', security_group.id, old_ip)
-                                ruleAction('authorize_ingress', security_group.id, current_ip)
+                                ruleAction('revoke_ingress', main.security_group.id, old_ip)
+                                ruleAction('authorize_ingress', main.security_group.id, current_ip)
 
         if new_grp_detected:
             print '[NEW] IP {} added to "{}"'.format(current_ip, grp_name)
-            ruleAction('authorize_ingress', security_group.id, current_ip)
+            ruleAction('authorize_ingress', main.security_group.id, current_ip)
 
 if __name__ == '__main__':
     main()
