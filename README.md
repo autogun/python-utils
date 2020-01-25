@@ -12,6 +12,9 @@ Personal python utils to make my daily work easier
 - updateSecurityGroupEC2.py
   - When I find myself on the road and my 4G egress IP constantly changing, this little piece helps me update pre-configured security groups with the current IP instead of previously used, based on rule description.
 
+- ec2BulkSecurityGroupUpdate.py	
+  - Used when needed to update all security groups across all regions which has specific IP address to a set of new one.
+  
 # bash-utils
 Personal bash utils
 
